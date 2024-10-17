@@ -1,0 +1,529 @@
+{
+	"info": {
+		"_postman_id": "a6fc727f-a757-452c-85d0-19f0fab93038",
+		"name": "Calendar-Advanced",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20160475"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "회원가입",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"test@example.com\",\n    \"username\":\"홍길동\",\n    \"password\":\"hong1234\"\n}\n\n// {\n//     \"email\":\"test1@example.com\",\n//     \"username\":\"김미영\",\n//     \"password\":\"kim1234\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "로그인",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwOTg3NTAsImV4cCI6MTcyOTEwMjM1MH0.1NP0EdxcYvFHObLoeATczd8QnbehgzJdIIIDxLXju7g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"email\":\"test1@example.com\",\n//     \"password\":\"kim1234\"\n// }\n\n{\n    \"email\":\"test@example.com\",\n    \"username\":\"홍길동\",\n    \"password\":\"hong1234\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "중복여부",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/user/test1@example.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"test1@example.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원정보수정",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwOTQ1NDQsImV4cCI6MTcyOTA5ODE0NH0.RzFkOp6mvVyj_HtSdiqTN9-5S2U-PU4cSwWgPcv-aqY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"test1@example.com\",\n    \"username\":\"권승준\",\n    \"password\":\"kim1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/modify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"modify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원정보삭제",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwNDI2MTQsImV4cCI6MTcyOTA0NjIxNH0.Vl_I0YpYdpZ7ds76aF2gXNL2zxreiTlH3IiNnyq48-k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Schedule",
+			"item": [
+				{
+					"name": "일정등록",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwOTg3NTAsImV4cCI6MTcyOTEwMjM1MH0.1NP0EdxcYvFHObLoeATczd8QnbehgzJdIIIDxLXju7g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\":\"2024-11-14\",\n    \"title\":\"일정테스트제목3\",\n    \"contents\":\"일정테스트내용3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/schedule/submit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"schedule",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "일정전체조회",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwNDk2MzAsImV4cCI6MTcyOTA1MzIzMH0.0rONMDFw8qJCwcPOphqMAcPrKvFKjEiePstMnz-sAP0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/schedule/list/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"schedule",
+								"list",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "특정일정조회",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwNTIyODMsImV4cCI6MTcyOTA1NTg4M30.N0O8h0i-GpLJdP9YrUoEHMW449XjP_drLtuzg6PalB8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/schedule/post/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"schedule",
+								"post",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "일정수정",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwNTIyODMsImV4cCI6MTcyOTA1NTg4M30.N0O8h0i-GpLJdP9YrUoEHMW449XjP_drLtuzg6PalB8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2024-11-10\",\n    \"title\": \"일정테스트제목2수정\",\n    \"contents\": \"일정테스트내용2수정\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/schedule/modify/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"schedule",
+								"modify",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "일정삭제",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwNjQ1ODMsImV4cCI6MTcyOTA2ODE4M30.QZ-lzY_xXghPhGwDpVMJZurfYMsWALjhhRvNXDlGM4k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/schedule/delete/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"schedule",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "댓글등록",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwNjA5MDIsImV4cCI6MTcyOTA2NDUwMn0.488zoCcLvd2k5ifVtsMNv6yOBdEy7PhriszjWtz5JEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\":\"와우 일정 너무 좋네요!\"\n}\n\n// {\n//     \"comment\":\"잘 보고 갑니다!\"\n// }\n\n// {\n//     \"comment\":\"흥미로운 일정이군요.\"\n// }\n\n// {\n//     \"comment\":\"많은 참고가 되었습니다\"\n// }\n\n// {\n//     \"comment\":\"재밌겠네요~\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comment/submit/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comment",
+								"submit",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "댓글전체조회",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwNjA5MDIsImV4cCI6MTcyOTA2NDUwMn0.488zoCcLvd2k5ifVtsMNv6yOBdEy7PhriszjWtz5JEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comment/list/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comment",
+								"list",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "댓글수정",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwNjA5MDIsImV4cCI6MTcyOTA2NDUwMn0.488zoCcLvd2k5ifVtsMNv6yOBdEy7PhriszjWtz5JEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\":\"다시 한번 보려고 찾아왔습니다\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comment/modify/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comment",
+								"modify",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "댓글삭제",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer%20eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlVTRVIiLCJpYXQiOjE3MjkwNjA5MDIsImV4cCI6MTcyOTA2NDUwMn0.488zoCcLvd2k5ifVtsMNv6yOBdEy7PhriszjWtz5JEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comment/delete/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comment",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
