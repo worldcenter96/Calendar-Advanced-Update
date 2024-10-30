@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 @Service
@@ -42,7 +43,7 @@ public class UserService {
         return UserResponseDto.of(user);
     }
 
-    public String signIn(UserRequestDto requestDto, HttpServletResponse res) throws ResponseException {
+    public String signIn(UserRequestDto requestDto, HttpServletResponse res) throws ResponseException, UnsupportedEncodingException {
 
         String email = requestDto.getEmail();
         String inputPassword = requestDto.getPassword();

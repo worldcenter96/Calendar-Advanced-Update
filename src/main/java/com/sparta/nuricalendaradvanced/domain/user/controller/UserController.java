@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
@@ -30,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<String> signIn(@RequestBody @Valid UserRequestDto requestDto, HttpServletResponse res) throws ResponseException {
+    public ResponseEntity<String> signIn(@RequestBody @Valid UserRequestDto requestDto, HttpServletResponse res) throws ResponseException, UnsupportedEncodingException {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

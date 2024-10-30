@@ -4,11 +4,12 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Slf4j(topic = "LoggingFilter")
-//@Component
+@Component
 @Order(1)
 public class LoggingFilter implements Filter {
     @Override
@@ -16,7 +17,9 @@ public class LoggingFilter implements Filter {
         // 전처리
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String url = httpServletRequest.getRequestURI();
-        log.info(url);
+        String userAgent = httpServletRequest.getHeader("user-agent");
+        log.info("url: " + url);
+        log.info("userAgent: " + userAgent);
 
         chain.doFilter(request, response); // 다음 Filter 로 이동
 

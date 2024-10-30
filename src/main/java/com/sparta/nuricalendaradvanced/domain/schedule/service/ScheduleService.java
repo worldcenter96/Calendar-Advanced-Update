@@ -32,7 +32,6 @@ public class ScheduleService {
 
     }
 
-    // 일정 전체 조회(페이징 적용)
     public ScheduleResponsePage findAllSchedule(int page, int size, String criteria) {
 
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, criteria));

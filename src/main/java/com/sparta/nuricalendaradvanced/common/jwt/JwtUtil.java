@@ -1,5 +1,7 @@
 package com.sparta.nuricalendaradvanced.common.jwt;
 
+import com.sparta.nuricalendaradvanced.common.exception.ResponseException;
+import com.sparta.nuricalendaradvanced.common.exception.ResponseStatus;
 import com.sparta.nuricalendaradvanced.domain.user.entity.UserRoleEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.module.ResolutionException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.Key;
@@ -41,7 +44,7 @@ public class JwtUtil {
     private Key key;
     private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
-    // 로그 설정
+
     public static final Logger logger = LoggerFactory.getLogger("JWT 관련 로그");
 
     @PostConstruct
@@ -50,45 +53,39 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
-    // 토큰 생성
     public String createToken(String id, UserRoleEnum role) {
 
         return BEARER_PREFIX +
                 Jwts.builder()
-                        .setSubject(id) // 사용자 식별값(ID)
-                        .claim(AUTHORIZATION_KEY, role) // 사용자 권한
-                        .setIssuedAt(new Date()) // 발급일
+                        .setSubject(id)
+                        .claim(AUTHORIZATION_KEY, role)
+                        .setIssuedAt(new Date())
                         .setExpiration(new Date(System.currentTimeMillis() + TOKEN_TIME))
-                        .signWith(key, signatureAlgorithm) // 암호화 알고리즘
+                        .signWith(key, signatureAlgorithm)
                         .compact();
     }
 
-    // JWT Cookie에 저장
-    public void addJwtCookie(String token, HttpServletResponse res) {
-        try {
-            // Cookie Value에는 공백이 불가능해서 인코딩 시 대체
-            token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20");
 
-            Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token); // Name-Value
-            cookie.setPath("/");
+    public void addJwtCookie(String token, HttpServletResponse res) throws UnsupportedEncodingException {
+        // Cookie Value에는 공백이 불가능해서 인코딩 시 대체
+        token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20");
 
-            // Response 객체에 Cookie 추가
-            res.addCookie(cookie);
-        } catch (UnsupportedEncodingException e) {
-            logger.error(e.getMessage());
-        }
+        Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token); // Name-Value
+        cookie.setPath("/");
+
+        res.addCookie(cookie);
     }
 
-    // JWT 토큰 substring
+
     public String substringToken(String tokenValue) {
         if (StringUtils.hasText(tokenValue) && tokenValue.startsWith(BEARER_PREFIX)) {
             return tokenValue.substring(7);
         }
         logger.error("토큰을 찾을 수 없습니다.");
-        throw new NullPointerException("토큰을 찾을 수 없습니다.");
+        throw new ResponseException(ResponseStatus.TOKEN_NOT_FOUND);
     }
 
-    // 토큰 검증
+
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
@@ -100,24 +97,23 @@ public class JwtUtil {
         } catch (UnsupportedJwtException e) {
             logger.error("Unsupported JWT token, 지원되지 않는 JWT 토큰 입니다.");
         } catch (IllegalArgumentException e) {
-            logger.error("JWT clains is empty, 잘못된 JWT 토큰 입니다.");
+            logger.error("JWT claims is empty, 잘못된 JWT 토큰 입니다.");
         }
         return false;
     }
 
-    // 토큰에서 사용자 정보 가져오기
+
     public Claims getUserInfoFromToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
-    // HttpServletRequest 에서 Cookie Value : JWT 가져오기
     public String getTokenFromRequest(HttpServletRequest req) {
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals(AUTHORIZATION_HEADER)) {
                     try {
-                        return URLDecoder.decode(cookie.getValue(), "UTF-8"); // Encode 되어 넘어간 Value 다시 Decode
+                        return URLDecoder.decode(cookie.getValue(), "UTF-8");
                     } catch (UnsupportedEncodingException e) {
                         return null;
                     }
