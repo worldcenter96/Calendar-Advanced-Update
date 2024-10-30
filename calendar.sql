@@ -17,7 +17,7 @@ create table schedule (
     updated_at datetime(6)
 );
 
-create table post (
+create table userSchedule (
     id bigint auto_increment primary key ,
     schedule_id bigint,
     user_id bigint

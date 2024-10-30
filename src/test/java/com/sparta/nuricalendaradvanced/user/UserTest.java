@@ -1,11 +1,6 @@
 package com.sparta.nuricalendaradvanced.user;
 
-import com.sparta.nuricalendaradvanced.entity.User;
-import com.sparta.nuricalendaradvanced.repository.UserRepository;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest

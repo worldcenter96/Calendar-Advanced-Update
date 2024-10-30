@@ -22,7 +22,7 @@ Lv1. API 명세 및 ERD 작성<br>
 | 회원 정보 삭제        | DELETE | /api/user/delete             | Cookie에 저장된 JWT: id                               |                                                        |
 | 일정 등록             | POST   | /api/schedule/submit         | { "date": "{schedule date}", "title": "{title}", "contents": "{contents}" } | { "id": {id}, "date": "{schedule date}", "title": "{title}", "contents": "{contents}", "updatedAt": "{updatedAt}" } |
 | 일정 전체 조회        | GET    | /api/schedule/list/{page}    | Param:                                                   | { "id": {id}, "date": "{schedule date}", "title": "{title}", "contents": "{contents}", "updatedAt": "{updatedAt}" } |
-| 특정 일정 조회        | GET    | /api/schedule/post/{id}      | Param:                                                   | { "id": {id}, "date": "{schedule date}", "title": "{title}", "contents": "{contents}", "updatedAt": "{updatedAt}" } |
+| 특정 일정 조회        | GET    | /api/schedule/userSchedule/{id}      | Param:                                                   | { "id": {id}, "date": "{schedule date}", "title": "{title}", "contents": "{contents}", "updatedAt": "{updatedAt}" } |
 | 일정 수정             | PUT    | /api/schedule/modify/{id}    | Param: , { "date": "{schedule date}", "title": "{title}", "contents": "{contents}" } | { "id": {id}, "date": "{schedule date}", "title": "{title}", "contents": "{contents}", "updatedAt": "{updatedAt}" } |
 | 일정 삭제             | DELETE | /api/schedule/delete/{id}     | Param: id                                              |                                                        |
 | 댓글 등록             | POST   | /api/comment/submit/{일정id}  | { "comment": "{comment}" }                             | { "id": {id}, "scheduleId": {id}, "comment": "{comment}" } |
@@ -190,7 +190,7 @@ http://localhost:8080/api/schedule/list/1
 ```
 ```json
 // 특정 일정 조회
-http://localhost:8080/api/schedule/post/1
+http://localhost:8080/api/schedule/userSchedule/1
 ```
 ```json
 // 일정 수정
