@@ -1,7 +1,7 @@
 package com.sparta.nuricalendaradvanced.domain.user.service;
 
-import com.sparta.nuricalendaradvanced.common.exception.UserException;
-import com.sparta.nuricalendaradvanced.common.exception.UserResponseStatus;
+import com.sparta.nuricalendaradvanced.common.exception.ResponseException;
+import com.sparta.nuricalendaradvanced.common.exception.ResponseStatus;
 import com.sparta.nuricalendaradvanced.common.jwt.JwtUtil;
 import com.sparta.nuricalendaradvanced.domain.user.dto.UserRequestDto;
 import com.sparta.nuricalendaradvanced.domain.user.dto.UserResponseDto;
@@ -26,7 +26,7 @@ public class UserService {
     private final JwtUtil jwtUtil;
 
 
-    public UserResponseDto signUp(UserRequestDto requestDto) throws UserException {
+    public UserResponseDto signUp(UserRequestDto requestDto) throws ResponseException {
 
         String username = requestDto.getUsername();
         String email = requestDto.getEmail();
@@ -42,12 +42,12 @@ public class UserService {
         return UserResponseDto.of(user);
     }
 
-    public String signIn(UserRequestDto requestDto, HttpServletResponse res) throws UserException {
+    public String signIn(UserRequestDto requestDto, HttpServletResponse res) throws ResponseException {
 
         String email = requestDto.getEmail();
         String inputPassword = requestDto.getPassword();
         User user = userRepository.findByEmail(email).orElseThrow(() ->
-                new UserException(UserResponseStatus.USER_NOT_FOUND));
+                new ResponseException(ResponseStatus.USER_NOT_FOUND));
 
         checkPassword(inputPassword, user.getPassword());
 
@@ -59,10 +59,10 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDto updateUser(UserRequestDto requestDto, User user) throws UserException {
+    public UserResponseDto updateUser(UserRequestDto requestDto, User user) throws ResponseException {
 
         User userInfo = userRepository.findById(user.getId()).orElseThrow(() ->
-                new UserException(UserResponseStatus.USER_NOT_FOUND));
+                new ResponseException(ResponseStatus.USER_NOT_FOUND));
 
         String email = requestDto.getEmail();
         String username = requestDto.getUsername();
@@ -79,17 +79,17 @@ public class UserService {
     }
 
 
-    public void checkUsername(String username) throws UserException {
+    public void checkUsername(String username) throws ResponseException {
         Optional<User> checkUsername = userRepository.findByUsername(username);
         if (checkUsername.isPresent()) {
-            throw new UserException(UserResponseStatus.USER_NAME_DUPLICATED);
+            throw new ResponseException(ResponseStatus.USER_NAME_DUPLICATED);
         }
     }
 
-    public void checkEmail(String email) throws UserException {
+    public void checkEmail(String email) throws ResponseException {
         Optional<User> checkEmail = userRepository.findByEmail(email);
         if (checkEmail.isPresent()) {
-            throw new UserException(UserResponseStatus.USER_EMAIL_DUPLICATED);
+            throw new ResponseException(ResponseStatus.USER_EMAIL_DUPLICATED);
 
         }
     }
@@ -97,11 +97,11 @@ public class UserService {
     @Value("${jwt.secret.key}")
     private String secretKey;
 
-    public UserRoleEnum checkRole(UserRequestDto requestDto) throws UserException {
+    public UserRoleEnum checkRole(UserRequestDto requestDto) throws ResponseException {
         UserRoleEnum role = UserRoleEnum.USER;
         if (requestDto.isAdmin()) {
             if (!requestDto.getAdminToken().equals(secretKey)) {
-                throw new UserException(UserResponseStatus.ADMIN_PASSWORD_NOT_MATCH);
+                throw new ResponseException(ResponseStatus.ADMIN_PASSWORD_NOT_MATCH);
 
             }
             role = UserRoleEnum.ADMIN;
@@ -109,9 +109,9 @@ public class UserService {
         return role;
     }
 
-    public void checkPassword(String inputPassword, String password) throws UserException {
+    public void checkPassword(String inputPassword, String password) throws ResponseException {
         if (!passwordEncoder.matches(inputPassword, password)) {
-            throw new UserException(UserResponseStatus.ADMIN_PASSWORD_NOT_MATCH);
+            throw new ResponseException(ResponseStatus.ADMIN_PASSWORD_NOT_MATCH);
         }
     }
 

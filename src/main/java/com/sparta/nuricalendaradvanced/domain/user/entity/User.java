@@ -1,13 +1,9 @@
 package com.sparta.nuricalendaradvanced.domain.user.entity;
 
 import com.sparta.nuricalendaradvanced.common.entity.Timestamped;
-import com.sparta.nuricalendaradvanced.domain.userschedule.entity.UserSchedule;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -30,9 +26,6 @@ public class User extends Timestamped {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
-
-    @OneToMany(mappedBy = "user")
-    private List<UserSchedule> userScheduleList = new ArrayList<>();
 
     public static User from(String username, String email, String password, UserRoleEnum role) {
         User user = new User();

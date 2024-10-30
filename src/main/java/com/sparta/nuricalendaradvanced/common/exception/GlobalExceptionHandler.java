@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = UserException.class)
-    public ResponseEntity<String> userException(UserException e) {
+    @ExceptionHandler(value = ResponseException.class)
+    public ResponseEntity<String> responseException(ResponseException e) {
         return ResponseEntity
                 .status(e.getResponseStatus().getHttpStatus())
                 .body(e.getErrMessage());
