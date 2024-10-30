@@ -1,6 +1,8 @@
 package com.sparta.nuricalendaradvanced.domain.user.service;
 
-import com.sparta.nuricalendaradvanced.domain.common.jwt.JwtUtil;
+import com.sparta.nuricalendaradvanced.common.exception.UserException;
+import com.sparta.nuricalendaradvanced.common.exception.UserResponseStatus;
+import com.sparta.nuricalendaradvanced.common.jwt.JwtUtil;
 import com.sparta.nuricalendaradvanced.domain.user.dto.UserRequestDto;
 import com.sparta.nuricalendaradvanced.domain.user.dto.UserResponseDto;
 import com.sparta.nuricalendaradvanced.domain.user.entity.User;
@@ -24,7 +26,7 @@ public class UserService {
     private final JwtUtil jwtUtil;
 
 
-    public UserResponseDto signUp(UserRequestDto requestDto) {
+    public UserResponseDto signUp(UserRequestDto requestDto) throws UserException {
 
         String username = requestDto.getUsername();
         String email = requestDto.getEmail();
@@ -40,12 +42,12 @@ public class UserService {
         return UserResponseDto.of(user);
     }
 
-    public String signIn(UserRequestDto requestDto, HttpServletResponse res) {
+    public String signIn(UserRequestDto requestDto, HttpServletResponse res) throws UserException {
 
         String email = requestDto.getEmail();
         String inputPassword = requestDto.getPassword();
         User user = userRepository.findByEmail(email).orElseThrow(() ->
-                new IllegalArgumentException("해당 회원은 존재하지 않습니다."));
+                new UserException(UserResponseStatus.USER_NOT_FOUND));
 
         checkPassword(inputPassword, user.getPassword());
 
@@ -57,9 +59,10 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDto updateUser(UserRequestDto requestDto, User user) {
+    public UserResponseDto updateUser(UserRequestDto requestDto, User user) throws UserException {
 
-        User userInfo = userRepository.findById(user.getId()).orElseThrow(IllegalArgumentException::new);
+        User userInfo = userRepository.findById(user.getId()).orElseThrow(() ->
+                new UserException(UserResponseStatus.USER_NOT_FOUND));
 
         String email = requestDto.getEmail();
         String username = requestDto.getUsername();
@@ -76,17 +79,17 @@ public class UserService {
     }
 
 
-    public void checkUsername(String username) {
+    public void checkUsername(String username) throws UserException {
         Optional<User> checkUsername = userRepository.findByUsername(username);
         if (checkUsername.isPresent()) {
-            throw new IllegalArgumentException("중복된 Email 입니다.");
+            throw new UserException(UserResponseStatus.USER_NAME_DUPLICATED);
         }
     }
 
-    public void checkEmail(String email) {
+    public void checkEmail(String email) throws UserException {
         Optional<User> checkEmail = userRepository.findByEmail(email);
         if (checkEmail.isPresent()) {
-            throw new IllegalArgumentException("중복된 Email 입니다.");
+            throw new UserException(UserResponseStatus.USER_EMAIL_DUPLICATED);
 
         }
     }
@@ -94,11 +97,11 @@ public class UserService {
     @Value("${jwt.secret.key}")
     private String secretKey;
 
-    public UserRoleEnum checkRole(UserRequestDto requestDto) {
+    public UserRoleEnum checkRole(UserRequestDto requestDto) throws UserException {
         UserRoleEnum role = UserRoleEnum.USER;
         if (requestDto.isAdmin()) {
             if (!requestDto.getAdminToken().equals(secretKey)) {
-                throw new IllegalArgumentException("관리자 암호가 틀려 등록이 불가능합니다.");
+                throw new UserException(UserResponseStatus.ADMIN_PASSWORD_NOT_MATCH);
 
             }
             role = UserRoleEnum.ADMIN;
@@ -106,9 +109,9 @@ public class UserService {
         return role;
     }
 
-    public void checkPassword(String inputPassword, String password) {
+    public void checkPassword(String inputPassword, String password) throws UserException {
         if (!passwordEncoder.matches(inputPassword, password)) {
-            throw new IllegalArgumentException("암호가 일치하지 않습니다.");
+            throw new UserException(UserResponseStatus.ADMIN_PASSWORD_NOT_MATCH);
         }
     }
 

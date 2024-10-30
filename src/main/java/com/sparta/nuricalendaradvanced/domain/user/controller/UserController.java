@@ -1,5 +1,6 @@
 package com.sparta.nuricalendaradvanced.domain.user.controller;
 
+import com.sparta.nuricalendaradvanced.common.exception.UserException;
 import com.sparta.nuricalendaradvanced.domain.user.dto.UserRequestDto;
 import com.sparta.nuricalendaradvanced.domain.user.dto.UserResponseDto;
 import com.sparta.nuricalendaradvanced.domain.user.entity.User;
@@ -20,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<UserResponseDto> signUp(@RequestBody @Valid UserRequestDto requestDto) {
+    public ResponseEntity<UserResponseDto> signUp(@RequestBody @Valid UserRequestDto requestDto) throws UserException{
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<String> signIn(@RequestBody @Valid UserRequestDto requestDto, HttpServletResponse res) {
+    public ResponseEntity<String> signIn(@RequestBody @Valid UserRequestDto requestDto, HttpServletResponse res) throws UserException  {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -40,7 +41,7 @@ public class UserController {
 
     // 회원가입 시 이메일 중복 체크 용 API
     @GetMapping("/{email}")
-    public ResponseEntity<Void> checkEmail(@PathVariable String email) {
+    public ResponseEntity<Void> checkEmail(@PathVariable String email) throws UserException{
 
         userService.checkEmail(email);
         return ResponseEntity
@@ -50,7 +51,7 @@ public class UserController {
     }
 
     @PutMapping()
-    public ResponseEntity<UserResponseDto> updateUser(@RequestBody UserRequestDto requestDto, HttpServletRequest req) {
+    public ResponseEntity<UserResponseDto> updateUser(@RequestBody UserRequestDto requestDto, HttpServletRequest req) throws UserException{
 
         User user = (User) req.getAttribute("user");
         return ResponseEntity

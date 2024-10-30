@@ -1,4 +1,4 @@
-package com.sparta.nuricalendaradvanced.domain.common.entity;
+package com.sparta.nuricalendaradvanced.common.entity;
 
 
 import jakarta.persistence.*;

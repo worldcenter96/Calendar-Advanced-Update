@@ -1,4 +1,4 @@
-package com.sparta.nuricalendaradvanced.domain.common.filter;
+package com.sparta.nuricalendaradvanced.common.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package com.sparta.nuricalendaradvanced.domain.common.jwt;
+package com.sparta.nuricalendaradvanced.common.jwt;
 
 import com.sparta.nuricalendaradvanced.domain.user.entity.UserRoleEnum;
 import io.jsonwebtoken.*;

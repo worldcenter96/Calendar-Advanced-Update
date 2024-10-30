@@ -1,6 +1,6 @@
-package com.sparta.nuricalendaradvanced.domain.common.filter;
+package com.sparta.nuricalendaradvanced.common.filter;
 
-import com.sparta.nuricalendaradvanced.domain.common.jwt.JwtUtil;
+import com.sparta.nuricalendaradvanced.common.jwt.JwtUtil;
 import com.sparta.nuricalendaradvanced.domain.user.entity.User;
 import com.sparta.nuricalendaradvanced.domain.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;

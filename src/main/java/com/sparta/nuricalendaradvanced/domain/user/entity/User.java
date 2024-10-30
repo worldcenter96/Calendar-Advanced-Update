@@ -1,6 +1,6 @@
 package com.sparta.nuricalendaradvanced.domain.user.entity;
 
-import com.sparta.nuricalendaradvanced.domain.common.entity.Timestamped;
+import com.sparta.nuricalendaradvanced.common.entity.Timestamped;
 import com.sparta.nuricalendaradvanced.domain.userschedule.entity.UserSchedule;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -52,5 +52,7 @@ public class User extends Timestamped {
         this.username = username;
         this.password = password;
     }
+
+
 
 }

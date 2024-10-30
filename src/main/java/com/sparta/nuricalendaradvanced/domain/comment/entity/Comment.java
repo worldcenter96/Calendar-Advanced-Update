@@ -2,7 +2,7 @@ package com.sparta.nuricalendaradvanced.domain.comment.entity;
 
 import com.sparta.nuricalendaradvanced.domain.comment.dto.CommentRequestDto;
 import com.sparta.nuricalendaradvanced.domain.schedule.entity.Schedule;
-import com.sparta.nuricalendaradvanced.domain.common.entity.Timestamped;
+import com.sparta.nuricalendaradvanced.common.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

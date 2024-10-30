@@ -1,7 +1,7 @@
 package com.sparta.nuricalendaradvanced.domain.schedule.entity;
 
 import com.sparta.nuricalendaradvanced.domain.comment.entity.Comment;
-import com.sparta.nuricalendaradvanced.domain.common.entity.Timestamped;
+import com.sparta.nuricalendaradvanced.common.entity.Timestamped;
 import com.sparta.nuricalendaradvanced.domain.schedule.dto.ScheduleRequestDto;
 import com.sparta.nuricalendaradvanced.domain.schedule.dto.ScheduleResponseDto;
 import com.sparta.nuricalendaradvanced.domain.userschedule.entity.UserSchedule;

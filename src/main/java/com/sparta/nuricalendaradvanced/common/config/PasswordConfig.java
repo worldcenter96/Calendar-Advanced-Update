@@ -1,4 +1,4 @@
-package com.sparta.nuricalendaradvanced.domain.common.config;
+package com.sparta.nuricalendaradvanced.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
