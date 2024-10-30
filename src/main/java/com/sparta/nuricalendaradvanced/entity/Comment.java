@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Comment extends Timestamped{
 
@@ -22,6 +21,7 @@ public class Comment extends Timestamped{
     @ManyToOne
     @JoinColumn(name = "schedule_id")
     private Schedule schedule;
+
 
     public Comment(CommentRequestDto requestDto, Schedule schedule) {
         this.comment = requestDto.getComment();

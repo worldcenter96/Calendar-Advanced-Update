@@ -1,5 +1,6 @@
 package com.sparta.nuricalendaradvanced.entity;
 
+import com.sparta.nuricalendaradvanced.dto.ScheduleRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class User extends Timestamped {
 
@@ -46,4 +46,9 @@ public class User extends Timestamped {
         this.username = username;
         this.password = password;
     }
+
+
+
+
+
 }

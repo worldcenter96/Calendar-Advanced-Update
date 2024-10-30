@@ -2,6 +2,7 @@ package com.sparta.nuricalendaradvanced.dto;
 
 import com.sparta.nuricalendaradvanced.entity.Post;
 import com.sparta.nuricalendaradvanced.entity.Schedule;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ScheduleResponseDto {
 
     private Long id;
@@ -36,4 +38,5 @@ public class ScheduleResponseDto {
         this.username = post.getUser().getUsername();
         this.updatedAt = post.getSchedule().getUpdatedAt();
     }
+
 }

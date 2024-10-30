@@ -19,4 +19,7 @@ public class ScheduleRequestDto {
     @Size(max = 255)
     private String contents;
 
+    @Size(max = 10)
+    private String username;
+
 }

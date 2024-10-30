@@ -6,17 +6,15 @@ import com.sparta.nuricalendaradvanced.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/signup")
     public UserResponseDto signUp(@RequestBody @Valid UserRequestDto requestDto) {

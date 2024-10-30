@@ -6,21 +6,18 @@ import com.sparta.nuricalendaradvanced.entity.Comment;
 import com.sparta.nuricalendaradvanced.entity.Schedule;
 import com.sparta.nuricalendaradvanced.repository.CommentRepository;
 import com.sparta.nuricalendaradvanced.repository.ScheduleRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CommentService {
 
     private final CommentRepository commentRepository;
     private final ScheduleRepository scheduleRepository;
-
-    public CommentService(CommentRepository commentRepository, ScheduleRepository scheduleRepository) {
-        this.commentRepository = commentRepository;
-        this.scheduleRepository = scheduleRepository;
-    }
 
 
     public CommentResponseDto submitComment(Long scheduleId, CommentRequestDto requestDto) {
