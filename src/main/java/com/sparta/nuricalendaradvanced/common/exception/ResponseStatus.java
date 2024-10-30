@@ -14,7 +14,9 @@ public enum ResponseStatus {
     USER_PASSWORD_NOT_MATCH(HttpStatus.UNAUTHORIZED, "암호가 일치하지 않습니다."),
     ADMIN_PASSWORD_NOT_MATCH(HttpStatus.UNAUTHORIZED, "관리자 암호가 틀려 등록이 불가능합니다."),
 
-    SCHEDULE_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다.");
+    SCHEDULE_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다."),
+
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 댓글이 존재하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String errMessage;
