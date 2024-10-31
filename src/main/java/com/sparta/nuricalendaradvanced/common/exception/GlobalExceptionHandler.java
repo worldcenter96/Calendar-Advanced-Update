@@ -1,5 +1,6 @@
 package com.sparta.nuricalendaradvanced.common.exception;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,14 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(e.getMessage());
     }
+
+    @ExceptionHandler(JsonProcessingException.class)
+    public ResponseEntity<String> responseException(JsonProcessingException e) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(e.getMessage());
+    }
+
 
 
 }

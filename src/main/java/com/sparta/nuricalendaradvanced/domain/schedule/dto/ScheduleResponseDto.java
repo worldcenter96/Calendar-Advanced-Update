@@ -17,6 +17,7 @@ public class ScheduleResponseDto {
     private String title;
     private String contents;
     private String username;
+    private String weather;
     private LocalDateTime updatedAt;
 
     public static ScheduleResponseDto of(Schedule schedule) {
@@ -31,6 +32,7 @@ public class ScheduleResponseDto {
         this.title = schedule.getTitle();
         this.contents = schedule.getContents();
         this.username = schedule.getUser().getUsername();
+        this.weather = schedule.getWeather();
         this.updatedAt = schedule.getUpdatedAt();
 
     }

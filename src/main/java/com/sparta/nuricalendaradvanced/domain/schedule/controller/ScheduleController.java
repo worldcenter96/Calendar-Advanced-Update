@@ -1,5 +1,6 @@
 package com.sparta.nuricalendaradvanced.domain.schedule.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sparta.nuricalendaradvanced.common.exception.ResponseException;
 import com.sparta.nuricalendaradvanced.domain.schedule.dto.ScheduleRequestDto;
 import com.sparta.nuricalendaradvanced.domain.schedule.dto.ScheduleResponseDto;
@@ -22,7 +23,8 @@ public class ScheduleController {
 
 
     @PostMapping()
-    public ResponseEntity<ScheduleResponseDto> submitSchedule(@RequestBody @Valid ScheduleRequestDto requestDto, HttpServletRequest req) {
+    public ResponseEntity<ScheduleResponseDto> submitSchedule(@RequestBody @Valid ScheduleRequestDto requestDto,
+                                                              HttpServletRequest req) throws JsonProcessingException {
         User user = (User) req.getAttribute("user");
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -47,7 +49,7 @@ public class ScheduleController {
 
     @PutMapping()
     public ResponseEntity<ScheduleResponseDto> updateSchedule(@RequestParam Long id,
-                                                              @RequestBody ScheduleRequestDto requestDto) throws ResponseException{
+                                                              @RequestBody ScheduleRequestDto requestDto) throws ResponseException, JsonProcessingException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(scheduleService.updateSchedule(id, requestDto));

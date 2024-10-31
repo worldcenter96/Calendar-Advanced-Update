@@ -40,23 +40,25 @@ public class Schedule extends Timestamped {
     private List<Comment> commentList = new ArrayList<>();
 
 
-    public static Schedule from(ScheduleRequestDto requestDto, User user) {
+    public static Schedule from(ScheduleRequestDto requestDto, User user, String weather) {
         Schedule schedule = new Schedule();
-        schedule.initData(requestDto, user);
+        schedule.initData(requestDto, user, weather);
         return schedule;
     }
 
-    private void initData(ScheduleRequestDto requestDto, User user) {
+    private void initData(ScheduleRequestDto requestDto, User user, String weather) {
         this.date = requestDto.getDate();
         this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
+        this.weather = weather;
         this.user = user;
     }
 
-    public Schedule update(ScheduleRequestDto requestDto) {
+    public Schedule update(ScheduleRequestDto requestDto, String weather) {
         this.date = requestDto.getDate();
         this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
+        this.weather = weather;
         return this;
     }
 }
