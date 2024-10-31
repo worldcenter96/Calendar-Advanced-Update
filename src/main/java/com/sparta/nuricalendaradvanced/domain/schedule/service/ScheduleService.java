@@ -11,6 +11,7 @@ import com.sparta.nuricalendaradvanced.domain.schedule.entity.Schedule;
 import com.sparta.nuricalendaradvanced.domain.schedule.repository.ScheduleRepository;
 import com.sparta.nuricalendaradvanced.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Slf4j(topic = "Schedule Logic")
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {

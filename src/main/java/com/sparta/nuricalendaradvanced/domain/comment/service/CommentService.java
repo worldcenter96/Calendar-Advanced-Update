@@ -9,11 +9,13 @@ import com.sparta.nuricalendaradvanced.domain.comment.repository.CommentReposito
 import com.sparta.nuricalendaradvanced.domain.schedule.entity.Schedule;
 import com.sparta.nuricalendaradvanced.domain.schedule.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j(topic = "Comment Logic")
 @Service
 @RequiredArgsConstructor
 public class CommentService {
